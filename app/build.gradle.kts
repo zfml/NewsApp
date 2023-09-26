@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.kapt3.base.Kapt.kapt
+import java.util.Properties
 
 plugins {
     id("com.android.application")
@@ -7,9 +7,14 @@ plugins {
     id ("dagger.hilt.android.plugin")
 }
 
+
+
+
 android {
     namespace = "com.example.newsapp"
-    compileSdk = 33
+    compileSdk = 34
+
+
 
     defaultConfig {
         applicationId = "com.example.newsapp"
@@ -18,10 +23,18 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        // Read the API_KEY property from gradle.properties
+        val properties = Properties()
+        properties.load(project.rootProject.file("gradle.properties").inputStream())
+
+        buildConfigField("String","API_KEY",properties.getProperty("API_KEY"))
+
     }
 
     buildTypes {
@@ -31,17 +44,20 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -70,15 +86,22 @@ dependencies {
     implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:0.8.0")
     implementation ("com.squareup.okhttp3:okhttp:4.2.1")
 
+    implementation ("com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.3")
+
+
 
     // Paging 3.0
-    implementation ("androidx.paging:paging-compose:3.3.0-alpha02")
+    implementation("androidx.paging:paging-runtime:3.2.1")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
 
     // Dagger - Hilt
     implementation ("com.google.dagger:hilt-android:2.44")
     kapt("com.google.dagger:hilt-compiler:2.44")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
-    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0-rc01")
+    implementation ("androidx.hilt:hilt-navigation-compose:1.1.0-alpha01")
+
+    // Coil Compose
+    implementation ("io.coil-kt:coil-compose:2.4.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
