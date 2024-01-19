@@ -3,12 +3,11 @@ package com.example.newsapp.data.repository
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.newsapp.data.remote.NewsApi
-import com.example.newsapp.domain.Article
-import javax.inject.Inject
+import com.example.newsapp.domain.model.Article
 
 class NewsPagingSource (
     private  val newsApi: NewsApi
-): PagingSource<Int,Article> (){
+): PagingSource<Int, Article> (){
     override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)

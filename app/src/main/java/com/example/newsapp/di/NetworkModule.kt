@@ -2,6 +2,7 @@ package com.example.newsapp.di
 
 import com.example.newsapp.data.remote.ApiKeyInterceptor
 import com.example.newsapp.data.remote.NewsApi
+import com.example.newsapp.data.repository.NewsRepositoryImpl
 import com.example.newsapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -52,6 +53,10 @@ object NetworkModule {
     fun provideNewsApi(retrofit: Retrofit): NewsApi {
         return retrofit.create(NewsApi::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideNewsRepository(api: NewsApi) = NewsRepositoryImpl(api)
 
 
 }
