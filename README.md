@@ -1,8 +1,9 @@
-# NewsApp
+## NewsApp
+### About
+  ### News Articals from [News Api](https://newsapi.org) are feched by using
+ - Hilt Dependency Injection
+ - Retrofit
+ - Paging3
 
-## Retrofit Paging3 Dagger-Hilt in Android
 
-### In this project,The Myanmar News Articles are feteched from News Api with {Api Key} by using Paging3
-
-
-<img src="https://github.com/zfml/NewsApp/assets/137433031/3e076293-3a2e-4e3d-b566-c19295adb4c7" width="200" height="330">
+<img width="360" alt="Screenshot 2567-01-19 at 11 09 23" src="https://github.com/zfml/NewsApp/assets/137433031/c50efbf5-d294-4daf-b54c-580ff799cd72">
